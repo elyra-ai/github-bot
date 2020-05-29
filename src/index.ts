@@ -28,5 +28,21 @@ export = (app: Application) => {
 To try out this branch on [binder](https://mybinder.org), follow this link: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/${user}/${repo}/${ref}?urlpath=lab)`
     const issueComment = context.issue({ body: comment })
     await context.github.issues.createComment(issueComment)
-  })
+  });
+
+  // Add triage label to all newly opened issues
+  app.on('issues.opened', async (context) => {
+    const issueLabels =context.issue({
+        labels: ['status:Needs Triage']
+      })
+    await context.github.issues.addLabels(issueLabels)
+  });
+
+  // Remove triage label when an issue is added to a milestone
+  app.on('issues.labeled', async (context) => {
+    const issueLabels =context.issue({
+        label: ['status:Needs Triage']
+      })
+    await context.github.issues.removeLabels(issueLabels)
+  });
 }
