@@ -32,15 +32,15 @@ To try out this branch on [binder](https://mybinder.org), follow this link: [![B
 
   // Add triage label to all newly opened issues
   app.on('issues.opened', async (context) => {
-    const issueLabels =context.issue({
+    const issueLabels = context.issue({
         labels: ['status:Needs Triage']
       })
     await context.github.issues.addLabels(issueLabels)
   });
 
   // Remove triage label when an issue is added to a milestone
-  app.on('issues.labeled', async (context) => {
-    const issueLabels =context.issue({
+  app.on('issues.milestoned', async (context) => {
+    const issueLabels = context.issue({
         label: ['status:Needs Triage']
       })
     await context.github.issues.removeLabels(issueLabels)
