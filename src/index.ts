@@ -38,11 +38,11 @@ To try out this branch on [binder](https://mybinder.org), follow this link: [![B
     await context.github.issues.addLabels(issueLabels)
   });
 
-  // Remove triage label when an issue is added to a milestone
-  app.on('issues.milestoned', async (context) => {
-    const issueLabels = context.issue({
-        label: ['status:Needs Triage']
-      })
-    await context.github.issues.removeLabels(issueLabels)
-  });
+//  // Remove triage label when an issue is added to a milestone
+//  app.on('issues.milestoned', async (context) => {
+//    const issueLabels = context.issue({
+//        label: ['status:Needs Triage']
+//      })
+//    await context.github.issues.removeLabels(issueLabels)
+//  });
 }
